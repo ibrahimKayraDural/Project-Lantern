@@ -20,6 +20,10 @@ public class TestMonster : Entity
     enum State 
     {
         Chase,
+        Ready,
+        Attack,
+        Hurt,
+        Dead
 
     }
     void SelectDestination()
