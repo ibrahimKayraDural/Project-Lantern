@@ -44,7 +44,7 @@ public class FuelController : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(FuelLevel);
+        //Debug.Log(FuelLevel);
         if (Input.GetMouseButton(0) && FuelLevel > 0)//eðer basmýosa bide en son basýmýndan 1 sn sora
         {
             FuelSpend(Time.deltaTime);

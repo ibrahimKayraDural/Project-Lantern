@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField] GameObject _player;
+    [SerializeField] GameObject _lantern;
 
     public bool debugModeOn { get; private set; }
 
@@ -13,6 +14,7 @@ public class GameManager : MonoSingleton<GameManager>
         if(_player == null)
         {
             _player = GameObject.FindGameObjectsWithTag("Player")[0];
+            _lantern = GameObject.Find("Lantern");
             if (_player == null)
                 Debug.LogError("WHERE IS THE PLAYER");
         }
@@ -42,5 +44,6 @@ public class GameManager : MonoSingleton<GameManager>
     public void ToggleDebugMode(bool SetOn) => debugModeOn = SetOn;
     public GameObject GetPlayerGO() => _player;
     public Transform GetPlayerTransform() => _player.transform;
-    public Vector2 GetPlayerPosition() => _player.transform.position;
+    public Vector2 GetLanternPosition() => _lantern.transform.position;
+    public Vector2 GetPlayerPosition() => _player.GetComponent<CapsuleCollider2D>().transform.position;
 }
