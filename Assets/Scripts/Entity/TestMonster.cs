@@ -13,7 +13,6 @@ public class TestMonster : Entity
         base.Update();
         SelectDestination();
         AIMovementTo(target);
-        Debug.LogWarning(lanternLoc);
 
     }
 
@@ -27,17 +26,15 @@ public class TestMonster : Entity
         if ((playerLoc - new Vector2(transform.position.x, transform.position.y)).magnitude < (lanternLoc - new Vector2(transform.position.x, transform.position.y)).magnitude)
         {
             target = GameManager.instance.GetPlayerPosition();
-            Debug.LogError("PLAYER");
         }
         else if ((lanternLoc - new Vector2(transform.position.x, transform.position.y)).magnitude < (playerLoc - new Vector2(transform.position.x, transform.position.y)).magnitude)
         {
             target = GameManager.instance.GetLanternPosition();
-            Debug.LogError("LANTERN");
 
         }
         else
         {
-            //Debug.Log("What");
+            target = GameManager.instance.GetPlayerPosition();
         }
 
     }
