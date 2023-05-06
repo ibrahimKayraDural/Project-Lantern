@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TestMonster : Entity
 {
+    [Header("Targeting")]
     [SerializeField] Vector2 target;
     [SerializeField] Vector2 playerLoc;
     [SerializeField] Vector2 lanternLoc;
@@ -16,6 +17,10 @@ public class TestMonster : Entity
 
     }
 
+    enum State 
+    {
+
+    }
     void SelectDestination()
     {
         playerLoc = GameManager.instance.GetPlayerPosition();

@@ -131,6 +131,7 @@ public abstract class Entity : MonoBehaviour
     void Die() 
     { 
         isDead = true; 
+        //DieAnim
     }
 
     void Flip()
@@ -150,10 +151,12 @@ public abstract class Entity : MonoBehaviour
     {
         speedModifierPercent = _speedInOrangePercent;
         agent.speed = Speed;
+        //SlowedWalkAnim
     }
     public void SetSpeedToDefault()
     {
         speedModifierPercent = 100;
         agent.speed = Speed;
+        //NormalWalkAnim
     }
 }
