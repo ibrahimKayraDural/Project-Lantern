@@ -19,6 +19,7 @@ public class TestMonster : Entity
 
     enum State 
     {
+        Chase,
 
     }
     void SelectDestination()
