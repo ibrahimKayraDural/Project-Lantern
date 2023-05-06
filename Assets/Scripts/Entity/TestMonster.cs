@@ -20,20 +20,18 @@ public class TestMonster : Entity
 
     void SelectDestination()
     {
-        target = GameManager.instance.GetPlayerPosition();
-
         playerLoc = GameManager.instance.GetPlayerPosition();
         lanternLoc = GameManager.instance.GetLanternPosition();
 
 
 
-        if (playerLoc - new Vector2(transform.position.x, transform.position.y) < lanternLoc - new Vector2(transform.position.x, transform.position.y))
+        if ((playerLoc - new Vector2(transform.position.x, transform.position.y)).magnitude < (lanternLoc - new Vector2(transform.position.x, transform.position.y)).magnitude)
         {
             target = GameManager.instance.GetPlayerPosition();
         }
-        else if (lanternLoc - new Vector2(transform.position.x, transform.position.y) < lanternLoc - new Vector2(transform.position.x, transform.position.y))
+        else if ((lanternLoc - new Vector2(transform.position.x, transform.position.y)).magnitude < (lanternLoc - new Vector2(transform.position.x, transform.position.y)).magnitude)
         {
-            target = GameManager.instance.GetLanternPosition;
+            target = GameManager.instance.GetLanternPosition();
         }
 
     }

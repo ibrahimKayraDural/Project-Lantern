@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
+  _lantern: {fileID: 0}
 --- !u!1 &496419163
 GameObject:
   m_ObjectHideFlags: 0
@@ -1485,10 +1486,10 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1778977283}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0061588287, y: 0}
@@ -2023,8 +2024,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.4478153}
-  m_Size: {x: 0.5, y: 0.7966697}
+  m_Offset: {x: 0, y: -0.56693685}
+  m_Size: {x: 0.5, y: 0.5584266}
   m_Direction: 0
 --- !u!50 &4897087125950393650
 Rigidbody2D:
