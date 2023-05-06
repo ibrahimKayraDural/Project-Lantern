@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TestMonster : Entity
 {
+    [Header("Targeting")]
     [SerializeField] Vector2 target;
     [SerializeField] Vector2 playerLoc;
     [SerializeField] Vector2 lanternLoc;
@@ -11,29 +12,35 @@ public class TestMonster : Entity
     internal override void Update()
     {
         base.Update();
-        if (target == null)
-        {
-            SelectDestination();
-        }
+        SelectDestination();
         AIMovementTo(target);
+
     }
 
+    enum State 
+    {
+        Chase,
+
+    }
     void SelectDestination()
     {
-        target = GameManager.instance.GetPlayerPosition();
-
         playerLoc = GameManager.instance.GetPlayerPosition();
         lanternLoc = GameManager.instance.GetLanternPosition();
 
 
 
-        if (playerLoc - new Vector2(transform.position.x, transform.position.y) < lanternLoc - new Vector2(transform.position.x, transform.position.y))
+        if ((playerLoc - new Vector2(transform.position.x, transform.position.y)).magnitude < (lanternLoc - new Vector2(transform.position.x, transform.position.y)).magnitude)
         {
             target = GameManager.instance.GetPlayerPosition();
         }
-        else if (lanternLoc - new Vector2(transform.position.x, transform.position.y) < lanternLoc - new Vector2(transform.position.x, transform.position.y))
+        else if ((lanternLoc - new Vector2(transform.position.x, transform.position.y)).magnitude < (playerLoc - new Vector2(transform.position.x, transform.position.y)).magnitude)
         {
-            target = GameManager.instance.GetLanternPosition;
+            target = GameManager.instance.GetLanternPosition();
+
+        }
+        else
+        {
+            target = GameManager.instance.GetPlayerPosition();
         }
 
     }
