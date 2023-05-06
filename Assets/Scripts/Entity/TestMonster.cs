@@ -11,11 +11,10 @@ public class TestMonster : Entity
     internal override void Update()
     {
         base.Update();
-        if (target == null)
-        {
-            SelectDestination();
-        }
+        SelectDestination();
         AIMovementTo(target);
+        Debug.LogWarning(lanternLoc);
+
     }
 
     void SelectDestination()
@@ -28,10 +27,17 @@ public class TestMonster : Entity
         if ((playerLoc - new Vector2(transform.position.x, transform.position.y)).magnitude < (lanternLoc - new Vector2(transform.position.x, transform.position.y)).magnitude)
         {
             target = GameManager.instance.GetPlayerPosition();
+            Debug.LogError("PLAYER");
         }
-        else if ((lanternLoc - new Vector2(transform.position.x, transform.position.y)).magnitude < (lanternLoc - new Vector2(transform.position.x, transform.position.y)).magnitude)
+        else if ((lanternLoc - new Vector2(transform.position.x, transform.position.y)).magnitude < (playerLoc - new Vector2(transform.position.x, transform.position.y)).magnitude)
         {
             target = GameManager.instance.GetLanternPosition();
+            Debug.LogError("LANTERN");
+
+        }
+        else
+        {
+            //Debug.Log("What");
         }
 
     }
