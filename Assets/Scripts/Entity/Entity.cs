@@ -54,7 +54,7 @@ public abstract class Entity : MonoBehaviour
 
     }
 
-    public void RecieveDamage(int damage)
+    public void RecieveDamage(float damage)
     {
         _health = Mathf.Max(0, _health - damage);
 
@@ -122,7 +122,7 @@ public abstract class Entity : MonoBehaviour
         if (isLookingLeft && transform.position.x < targetPosition.x)
             Flip();
 
-            targetPosition = new Vector3(targetPosition.x, targetPosition.y, 0);
+        targetPosition = new Vector3(targetPosition.x, targetPosition.y, 0);
         agent.SetDestination(targetPosition);
 
         moveTargetTime = Time.time + _AITick;
@@ -130,8 +130,12 @@ public abstract class Entity : MonoBehaviour
 
     void Die() 
     { 
-        isDead = true; 
+        isDead = true;
         //DieAnim
+
+        agent.enabled = false;
+
+        Destroy(gameObject);
     }
 
     void Flip()
@@ -150,13 +154,15 @@ public abstract class Entity : MonoBehaviour
     public void EnteredOrange()
     {
         speedModifierPercent = _speedInOrangePercent;
-        agent.speed = Speed;
+        if (AgentExists()) agent.speed = Speed;
         //SlowedWalkAnim
     }
     public void SetSpeedToDefault()
     {
         speedModifierPercent = 100;
-        agent.speed = Speed;
+        if (AgentExists()) agent.speed = Speed;
         //NormalWalkAnim
     }
+
+    bool AgentExists() => agent != null;
 }

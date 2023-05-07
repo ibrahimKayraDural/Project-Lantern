@@ -18,6 +18,8 @@ public class FuelController : MonoBehaviour
     [SerializeField] float RegenStartCooldown = 1;
     [SerializeField] float RegainLightPercent = 50;
 
+    public float FuelRegainValue => MaxFuel * RegainLightPercent / 100;
+
     public float FuelLevel => _currentFuelLevel;
     float _currentFuelLevel;
     public bool FuelIsDepleted => _fuelHasDepleted;
@@ -29,6 +31,7 @@ public class FuelController : MonoBehaviour
     List<string> UniqueNames = new List<string>();
 
     float regenStartTargetTime = float.MinValue;
+    bool redAreaInUse;
 
     void Start()
     {
@@ -44,8 +47,8 @@ public class FuelController : MonoBehaviour
     }
     void Update()
     {
-        //Debug.Log(FuelLevel);
-        if (Input.GetMouseButton(0) && FuelLevel > 0)//eðer basmýosa bide en son basýmýndan 1 sn sora
+        //eðer kýzýlsa bide en son basýmýndan 1 sn sora ayrýca ýþýklar gelince (sonuncusu tahminen)
+        if (redAreaInUse && FuelLevel > 0 && _fuelHasDepleted == false)
         {
             FuelSpend(Time.deltaTime);
             regenStartTargetTime = Time.time + RegenStartCooldown;
@@ -60,7 +63,7 @@ public class FuelController : MonoBehaviour
         _currentFuelLevel = Mathf.Min(_currentFuelLevel + amount, MaxFuel);
         RefreshSliderValue();
 
-        if (FuelLevel > MaxFuel * RegainLightPercent / 100)
+        if (FuelLevel > FuelRegainValue)
         {
             FuelRegained();
         }
@@ -113,4 +116,5 @@ public class FuelController : MonoBehaviour
         RemoveFuel(SpendDefaultPerSecond * deltaTime);
     }
     public void SetEnemyAreInOrange(bool setTo) => _enemyAreInOrange = setTo;
+    public void SetRedAreaInUse(bool setTo) => redAreaInUse = setTo;
 }

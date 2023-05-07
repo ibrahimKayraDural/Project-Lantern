@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 34397123}
   m_Layer: 10
-  m_Name: AttackLight
+  m_Name: RedLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -256,7 +256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &113449326
 Transform:
   m_ObjectHideFlags: 0
@@ -286,7 +286,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.66
-  m_Color: {r: 1, g: 0.277, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.22, b: 0, a: 1}
   m_Intensity: 4
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: b79ee7ee00000000e72c61f197f6e8cc2fa23e76
@@ -298,7 +298,7 @@ MonoBehaviour:
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0.64
+  m_PointLightInnerRadius: 0.93
   m_PointLightOuterRadius: 1
   m_PointLightDistance: 3
   m_PointLightQuality: 1
@@ -2297,20 +2297,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outerLight: {fileID: 2002478321}
   innerLight: {fileID: 2102812209}
+  redLight: {fileID: 113449327}
   outerCollider: {fileID: 1778977289}
   innerCollider: {fileID: 1778977288}
   EnemyLayers:
     serializedVersion: 2
     m_Bits: 512
   fuelController: {fileID: 1778977291}
-  outerRadius: 9
-  innerRadius: 3
-  outerColor: {r: 1, g: 0.8497861, b: 0.25943398, a: 1}
-  innerColor: {r: 1, g: 0.21360019, b: 0, a: 1}
-  outerIntensity: 0.9
-  innerIntensity: 0.4
+  lanternDamagePerSeconds: 1
   OuterColliderTweak: -2
   InnerColliderTweak: 0
+  redTweak: 0
+  outerRadius: 9
+  innerRadius: 3
+  redRadius: 1
+  outerColor: {r: 1, g: 0.8497861, b: 0.25943398, a: 1}
+  innerColor: {r: 1, g: 0.21360019, b: 0, a: 1}
+  redColor: {r: 1, g: 0.22, b: 0, a: 1}
+  outerIntensity: 0.9
+  innerIntensity: 0.4
+  redIntensity: 4
 --- !u!58 &1778977288
 CircleCollider2D:
   m_ObjectHideFlags: 0
