@@ -15,8 +15,9 @@ public class LanternLeaper : Entity
     float leapTime;
 
     State _state = State.Chase;
-    private void Start()
+    internal override void Start()
     {
+        base.Start();
         leapTime = LeapAnticipation;
     }
 

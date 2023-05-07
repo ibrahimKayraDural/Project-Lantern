@@ -34,7 +34,7 @@ public abstract class Entity : MonoBehaviour
     internal float moveTargetTime = -1;
     internal float speedModifierPercent = 100;
 
-    void Start()
+    internal virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
@@ -127,7 +127,6 @@ public abstract class Entity : MonoBehaviour
 
         moveTargetTime = Time.time + _AITick;
     }
-
     void Die() 
     { 
         isDead = true;
@@ -137,7 +136,6 @@ public abstract class Entity : MonoBehaviour
 
         Destroy(gameObject);
     }
-
     void Flip()
     {
         if (MeshToFlip != null)
@@ -150,7 +148,6 @@ public abstract class Entity : MonoBehaviour
 
         isLookingLeft = !isLookingLeft;
     }
-
     public void EnteredOrange()
     {
         speedModifierPercent = _speedInOrangePercent;
@@ -163,6 +160,5 @@ public abstract class Entity : MonoBehaviour
         if (AgentExists()) agent.speed = Speed;
         //NormalWalkAnim
     }
-
     bool AgentExists() => agent != null;
 }

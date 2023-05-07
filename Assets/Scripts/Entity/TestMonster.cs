@@ -9,12 +9,15 @@ public class TestMonster : Entity
     [SerializeField] Vector2 playerLoc;
     [SerializeField] Vector2 lanternLoc;
 
+    internal override void Start()
+    {
+        base.Start();
+    }
     internal override void Update()
     {
         base.Update();
         SelectDestination();
         AIMovementTo(target);
-
     }
 
     enum State 
@@ -24,28 +27,24 @@ public class TestMonster : Entity
         Attack,
         Hurt,
         Dead
-
     }
     void SelectDestination()
     {
         playerLoc = GameManager.instance.GetPlayerPosition();
         lanternLoc = GameManager.instance.GetLanternPosition();
 
-
-
-        if ((playerLoc - new Vector2(transform.position.x, transform.position.y)).magnitude < (lanternLoc - new Vector2(transform.position.x, transform.position.y)).magnitude)
-        {
-            target = GameManager.instance.GetPlayerPosition();
-        }
-        else if ((lanternLoc - new Vector2(transform.position.x, transform.position.y)).magnitude < (playerLoc - new Vector2(transform.position.x, transform.position.y)).magnitude)
+        //if ((playerLoc - new Vector2(transform.position.x, transform.position.y)).magnitude < (lanternLoc - new Vector2(transform.position.x, transform.position.y)).magnitude)
+        //{
+        //    target = GameManager.instance.GetPlayerPosition();
+        //}
+        //else 
+        if ((lanternLoc - new Vector2(transform.position.x, transform.position.y)).magnitude < (playerLoc - new Vector2(transform.position.x, transform.position.y)).magnitude)
         {
             target = GameManager.instance.GetLanternPosition();
-
         }
         else
         {
             target = GameManager.instance.GetPlayerPosition();
         }
-
     }
 }
