@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] GameObject entityToSpawn;
+    [SerializeField] bool destroyAfterUsage = true;
 
     public void SpawnEnemy()
     {
@@ -18,6 +19,11 @@ public class Spawner : MonoBehaviour
         {
             agent.Warp(transform.position);
             agent.enabled = true;
+        }
+
+        if(destroyAfterUsage)
+        {
+            Destroy(gameObject);
         }
     }
 }
