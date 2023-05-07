@@ -25,16 +25,18 @@ public class LanternLeaper : Entity
     {
         base.Update();
         SelectDestination();
-        
+
+        Debug.Log(_state);
 
         switch (_state)
         {
             case State.Chase:
-                AIMovementTo(target);
+                //AIMovementTo(target);
                 break;
             case State.Ready:
                 break;
             case State.Attack:
+                rb.velocity = target - new Vector2(transform.position.x, transform.position.y).normalized * LeapForce;
                 break;
             case State.Hurt:
                 break;
@@ -42,31 +44,22 @@ public class LanternLeaper : Entity
                 break;
         }
 
-        if ((target - new Vector2(transform.position.x, transform.position.y)).magnitude > LeapRange /*&& _state != State.Ready && _state != State.Attack && _state != State.Hurt && _state != State.Dead*/)
+        if ((target - new Vector2(transform.position.x, transform.position.y)).magnitude > LeapRange && leapTime == LeapAnticipation /*&& _state != State.Ready && _state != State.Attack && _state != State.Hurt && _state != State.Dead*/)
         {
             _state = State.Chase;
         }
 
-        if ((target - new Vector2(transform.position.x, transform.position.y)).magnitude <= LeapRange /*&& _state != State.Attack*/)
+        else if ((target - new Vector2(transform.position.x, transform.position.y)).magnitude <= LeapRange && leapTime == LeapAnticipation /*&& _state != State.Attack*/)
         {
             _state = State.Ready;
-
              leapTime += Time.time;
         }
 
-        if (leapTime <= Time.time && leapTime != LeapAnticipation && rb.velocity.magnitude < 1)
+        else if (leapTime <= Time.time && leapTime != LeapAnticipation /*&& rb.velocity.magnitude < 1*/)
         {
-            _state = State.Attack;
-            rb.velocity = target - new Vector2(transform.position.x, transform.position.y).normalized * LeapForce;
             leapTime = LeapAnticipation;
+            _state = State.Attack;
         }
-
-        if (rb.velocity.magnitude > 1)
-        {
-            _state = State.Chase;
-        }
-        
-
     }
 
     enum State 
