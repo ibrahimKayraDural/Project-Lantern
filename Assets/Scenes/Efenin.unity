@@ -3472,10 +3472,10 @@ Transform:
   - {fileID: 841416409}
   - {fileID: 129504167}
   - {fileID: 1481524656}
-  - {fileID: 977157674}
+  - {fileID: 831504891}
   - {fileID: 1281404588}
   - {fileID: 680299059}
-  - {fileID: 831504891}
+  - {fileID: 977157674}
   - {fileID: 1095755605}
   - {fileID: 1556132440}
   - {fileID: 481783334}
@@ -6043,7 +6043,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!70 &4897087125950393649
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
