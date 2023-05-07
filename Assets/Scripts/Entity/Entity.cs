@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,16 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class Entity : MonoBehaviour
 {
+    public enum MovementType { Normal, Locked}
+
+
+
+    public MovementType currentMovementType { get; private set; } = MovementType.Normal;
+
+    public event EventHandler<TopDownCharacterController> Event_PlayerInRange;
+
     public bool isDead { get; private set; } = false;
+    
     public float FuelCostMulti => _fuelCostMultiplierInOrange;
 
     public string DebuffingName = "";
@@ -18,9 +28,17 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] internal float _AITick = .1f;
     [SerializeField] internal float _fuelCostMultiplierInOrange = .1f;
     [SerializeField] internal float _speedInOrangePercent = 50;
+    [SerializeField] internal float playerDetectRange = 1f;
 
     [Header("Ref")]
     [SerializeField] internal Transform MeshToFlip;
+    [SerializeField] internal CircleCollider2D playerDetectCollider;
+    [SerializeField] internal GameObject attackObjectGO;
+
+    [Header("Values")]
+    [SerializeField] internal float attackDuration = .5f;
+
+    float AttackTargetTime = float.MinValue;
 
     internal float _health = 1;
     public float MaxHealth { get => _maxHealth; set => _maxHealth = Mathf.Max(value, 1); }
@@ -33,6 +51,7 @@ public abstract class Entity : MonoBehaviour
     internal bool isLookingLeft;
     internal float moveTargetTime = -1;
     internal float speedModifierPercent = 100;
+
 
     internal virtual void Start()
     {
@@ -47,11 +66,21 @@ public abstract class Entity : MonoBehaviour
         agent.updateUpAxis = false;
         agent.speed = Speed;
 
+        playerDetectCollider.isTrigger = true;
+
         _health = _maxHealth;
     }
     internal virtual void Update()
     {
 
+    }
+    void OnDestroy()
+    {
+        agent.enabled = false;
+    }
+    void OnValidate()
+    {
+        playerDetectCollider.radius = playerDetectRange;
     }
 
     public void RecieveDamage(float damage)
@@ -59,6 +88,28 @@ public abstract class Entity : MonoBehaviour
         _health = Mathf.Max(0, _health - damage);
 
         if (_health == 0) Die();
+    }
+
+    internal void StartAttack(object sender, TopDownCharacterController e)
+    {
+        if (AttackTargetTime > Time.time) return;
+
+        LockMovementForSeconds(attackDuration);
+
+        Vector2 playerPos = GameManager.instance.GetPlayerGO().transform.position;
+        Vector2 attackVector = playerPos - (Vector2)transform.position;
+
+        attackVector = attackVector.magnitude > playerDetectRange ? attackVector.normalized * playerDetectRange : attackVector;
+        GameObject attackObject = Instantiate(attackObjectGO, (Vector2)transform.position + attackVector, Quaternion.identity);
+
+        if (attackVector.x < 0)
+        {
+            Vector3 targetScale = attackObject.transform.localScale;
+            targetScale.x = -targetScale.x;
+            attackObject.transform.localScale = targetScale;
+        }
+
+        AttackTargetTime = Time.time + attackDuration;
     }
 
     #region oldMovement
@@ -114,8 +165,8 @@ public abstract class Entity : MonoBehaviour
 
     internal void AIMovementTo(Vector2 targetPosition)
     {
-        if (moveTargetTime > Time.time)
-            return;
+        if (currentMovementType == MovementType.Locked) return;
+        if (moveTargetTime > Time.time) return;
 
         if (isLookingLeft == false && transform.position.x > targetPosition.x)
             Flip();
@@ -148,6 +199,23 @@ public abstract class Entity : MonoBehaviour
 
         isLookingLeft = !isLookingLeft;
     }
+    public void SetMovementType(MovementType setTo) => currentMovementType = setTo;
+
+    public void LockMovementForSeconds(float seconds)
+    {
+        if (ChangeMovementTypeIEnum != null) StopCoroutine(ChangeMovementTypeIEnum);
+
+        SetMovementType(MovementType.Locked);
+        ChangeMovementTypeIEnum = SetMoveTypeAfterSeconds(MovementType.Normal, seconds);
+        StartCoroutine(ChangeMovementTypeIEnum);
+    }
+    IEnumerator ChangeMovementTypeIEnum;
+    IEnumerator SetMoveTypeAfterSeconds(MovementType type, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        SetMovementType(type);
+        ChangeMovementTypeIEnum = null;
+    }
     public void EnteredOrange()
     {
         speedModifierPercent = _speedInOrangePercent;
@@ -161,4 +229,15 @@ public abstract class Entity : MonoBehaviour
         //NormalWalkAnim
     }
     bool AgentExists() => agent != null;
+
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            if(collision.gameObject.TryGetComponent(out TopDownCharacterController playerController))
+            {
+                Event_PlayerInRange?.Invoke(this, playerController);
+            }
+        }
+    }
 }

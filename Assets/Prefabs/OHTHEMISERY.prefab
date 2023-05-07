@@ -39,7 +39,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5102715225530012936}
-  - component: {fileID: 2692533005578013434}
   - component: {fileID: 5102715225530012943}
   - component: {fileID: 940092610}
   m_Layer: 0
@@ -64,33 +63,6 @@ Transform:
   m_Father: {fileID: 5102715225591570463}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2692533005578013434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5102715225530012937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07e8e0c185778b647bc71605d489903e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  events:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5102715225591570458}
-        m_TargetAssemblyTypeName: TestMonster, Assembly-CSharp
-        m_MethodName: Attack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!212 &5102715225530012943
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -174,7 +146,7 @@ GameObject:
   - component: {fileID: 5102715225591570458}
   - component: {fileID: 5102715225591570456}
   - component: {fileID: 5102715225591570462}
-  - component: {fileID: 662657959}
+  - component: {fileID: 443609855}
   m_Layer: 9
   m_Name: OHTHEMISERY
   m_TagString: Enemy
@@ -237,15 +209,14 @@ MonoBehaviour:
   _AITick: 0.1
   _fuelCostMultiplierInOrange: 0
   _speedInOrangePercent: 50
+  playerDetectRange: 1.2
   MeshToFlip: {fileID: 5102715225591570463}
-  animator: {fileID: 0}
-  AttackCollider: {fileID: 662657959}
-  AttackPoint: {fileID: 1341220708}
+  playerDetectCollider: {fileID: 443609855}
+  attackObjectGO: {fileID: 3515490172440334485, guid: 9581853e7699a2c45bfb0494ecbfcfb0, type: 3}
   target: {x: 0, y: 0}
   playerLoc: {x: 0, y: 0}
   lanternLoc: {x: 0, y: 0}
-  attackRange: 1.5
-  attackRadius: 0.5
+  attackDuration: 0.5
 --- !u!195 &5102715225591570456
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -260,7 +231,7 @@ NavMeshAgent:
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 0
-  m_StoppingDistance: 1
+  m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -275,7 +246,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5102715225591570459}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -284,7 +255,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!58 &662657959
+--- !u!58 &443609855
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -294,12 +265,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 1.2
 --- !u!1 &5102715225859567763
 GameObject:
   m_ObjectHideFlags: 0

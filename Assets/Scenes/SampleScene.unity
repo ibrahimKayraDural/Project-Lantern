@@ -418,11 +418,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 569daf907e9b5504a9d95717d07120f7, type: 3}
---- !u!95 &940092610 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 940092610, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
-  m_PrefabInstance: {fileID: 5102715224754813435}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &955185186
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,10 +1062,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 443609855, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
+      propertyPath: m_Radius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5102715225591570458, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 940092610}
+      propertyPath: playerDetectRange
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5102715225591570459, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
       propertyPath: m_Name
       value: OHTHEMISERY
@@ -1119,7 +1118,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2692533005578013434, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
-    - {fileID: 662657959, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}

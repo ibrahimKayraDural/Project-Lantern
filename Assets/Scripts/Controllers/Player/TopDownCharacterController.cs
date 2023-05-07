@@ -1,9 +1,13 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TopDownCharacterController : MonoBehaviour
 {
+    public event EventHandler<bool> Event_OnDeath;
+
     [Header("Reference")]
+    [SerializeField] GameObject[] DisableOnDeath;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Animator animator;
     [SerializeField] Transform transformToFlip;
@@ -12,6 +16,7 @@ public class TopDownCharacterController : MonoBehaviour
     [SerializeField] float speed = 20f;
 
     bool isLookingLeft;
+    int health = 2;
 
     float PressTime_left, PressTime_right, PressTime_up, PressTime_down;
 
@@ -32,6 +37,23 @@ public class TopDownCharacterController : MonoBehaviour
         animator.SetBool("isMoving", anim_isMoving);
 
         rb.MovePosition(targetPosition);
+    }
+
+    public void GetDamaged()
+    {
+        health--;
+
+        if (health <= 0) Die();
+    }
+    void Die()
+    {
+        Event_OnDeath?.Invoke(this, true);
+        foreach(GameObject go in DisableOnDeath)
+        {
+            go.SetActive(false);
+        }
+
+        this.enabled = false;
     }
 
     Vector2 GetInputVector()

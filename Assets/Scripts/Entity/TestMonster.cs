@@ -12,7 +12,9 @@ public class TestMonster : Entity
     internal override void Start()
     {
         base.Start();
+        Event_PlayerInRange += StartAttack;
     }
+
     internal override void Update()
     {
         base.Update();
