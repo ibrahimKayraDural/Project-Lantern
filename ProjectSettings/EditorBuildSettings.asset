@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BuildScenes/MainMenu.unity
     guid: 173ea6a5903274e4792e7f4a0b5a5ebd
+  - enabled: 1
+    path: Assets/Scenes/BuildScenes/Efenin.unity
+    guid: 3d75148abeea95b4982a982f4ebd802a
   m_configObjects: {}

@@ -560,30 +560,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1220632232 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5102715225859567763, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
-  m_PrefabInstance: {fileID: 5102715224754813435}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1220632235
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220632232}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 41dbe82bab79ed545bc427922e6bb47d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1328081452
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,7 +632,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1983816239
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 100
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0, g: 1, b: 1, a: 0}
@@ -814,11 +790,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!95 &1564233116 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 940092610, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
-  m_PrefabInstance: {fileID: 5102715224754813435}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1861146195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1091,18 +1062,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 940092610, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: fd0691dc9d4094944b4817e8cb4b4f79, type: 2}
-    - target: {fileID: 5102715225591570458, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1564233116}
-    - target: {fileID: 5102715225591570458, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
-      propertyPath: glowAnimator
-      value: 
-      objectReference: {fileID: 1220632235}
     - target: {fileID: 5102715225591570459, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
       propertyPath: m_Name
       value: OHTHEMISERY
@@ -1151,9 +1110,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5102715225859567761, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 850fca233cfbdc04aa8e37575b5850a8, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
