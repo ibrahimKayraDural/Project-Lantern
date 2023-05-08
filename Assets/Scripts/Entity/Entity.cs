@@ -49,9 +49,8 @@ public abstract class Entity : MonoBehaviour
     internal Rigidbody2D rb;
     internal NavMeshAgent agent;
     internal bool isLookingLeft;
-    internal float moveTargetTime = -1;
+    internal float moveTargetTime = 1;
     internal float speedModifierPercent = 100;
-
 
     internal virtual void Start()
     {
@@ -72,7 +71,6 @@ public abstract class Entity : MonoBehaviour
     }
     internal virtual void Update()
     {
-
     }
     void OnDestroy()
     {

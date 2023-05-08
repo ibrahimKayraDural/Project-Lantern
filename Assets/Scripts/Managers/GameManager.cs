@@ -11,13 +11,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Start()
     {
-        if(_player == null)
-        {
-            _player = GameObject.FindGameObjectsWithTag("Player")[0];
-            _lantern = GameObject.Find("Lantern");
-            if (_player == null)
-                Debug.LogError("WHERE IS THE PLAYER");
-        }
     }
     private void Update()
     {

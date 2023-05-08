@@ -17,12 +17,15 @@ public class TestMonster : Entity
     {
         base.Start();
         Event_PlayerInRange += AttackNow;//Use Attack
+
+        target = transform.position;
     }
 
     internal override void Update()
     {
         base.Update();
         SelectDestination();
+        //GameObject go = GameObject.FindGameObjectWithTag("Player");
         AIMovementTo(target);
     }
 
