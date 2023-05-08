@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TestMonster : Entity
 {
+    [Header("Reference")]
+    [SerializeField] Animator animator;
+    [SerializeField] Animator glowAnimator;
+
     [Header("Targeting")]
     [SerializeField] Vector2 target;
     [SerializeField] Vector2 playerLoc;
@@ -12,7 +16,7 @@ public class TestMonster : Entity
     internal override void Start()
     {
         base.Start();
-        Event_PlayerInRange += StartAttack;
+        Event_PlayerInRange += AttackNow;//Use Attack
     }
 
     internal override void Update()
@@ -22,13 +26,14 @@ public class TestMonster : Entity
         AIMovementTo(target);
     }
 
-    enum State 
+    void AttackNow(object sender, TopDownCharacterController playerCont)
     {
-        Chase,
-        Ready,
-        Attack,
-        Hurt,
-        Dead
+        if (AttackTargetTime > Time.time) return;
+
+        animator.SetTrigger("Attack");
+        glowAnimator.SetTrigger("Attack");
+
+        StartAttack(sender, playerCont);
     }
     void SelectDestination()
     {

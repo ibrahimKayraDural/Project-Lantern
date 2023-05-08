@@ -209,14 +209,14 @@ MonoBehaviour:
   _AITick: 0.1
   _fuelCostMultiplierInOrange: 0
   _speedInOrangePercent: 50
-  playerDetectRange: 1.2
+  playerDetectRange: 2
   MeshToFlip: {fileID: 5102715225591570463}
   playerDetectCollider: {fileID: 443609855}
   attackObjectGO: {fileID: 3515490172440334485, guid: 9581853e7699a2c45bfb0494ecbfcfb0, type: 3}
+  attackDuration: 0.5
   target: {x: 0, y: 0}
   playerLoc: {x: 0, y: 0}
   lanternLoc: {x: 0, y: 0}
-  attackDuration: 0.5
 --- !u!195 &5102715225591570456
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.2
+  m_Radius: 2
 --- !u!1 &5102715225859567763
 GameObject:
   m_ObjectHideFlags: 0

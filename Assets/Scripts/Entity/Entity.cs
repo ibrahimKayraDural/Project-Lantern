@@ -38,7 +38,7 @@ public abstract class Entity : MonoBehaviour
     [Header("Values")]
     [SerializeField] internal float attackDuration = .5f;
 
-    float AttackTargetTime = float.MinValue;
+    internal float AttackTargetTime = float.MinValue;
 
     internal float _health = 1;
     public float MaxHealth { get => _maxHealth; set => _maxHealth = Mathf.Max(value, 1); }
