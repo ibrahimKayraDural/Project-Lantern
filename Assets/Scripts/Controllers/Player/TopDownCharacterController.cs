@@ -53,6 +53,15 @@ public class TopDownCharacterController : MonoBehaviour
             go.SetActive(false);
         }
 
+        if(LevelManager.instance == null)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            LevelManager.instance.GoToLevelAfterSeconds(2f, SceneManager.GetActiveScene().buildIndex, true);
+        }
+
         this.enabled = false;
     }
 

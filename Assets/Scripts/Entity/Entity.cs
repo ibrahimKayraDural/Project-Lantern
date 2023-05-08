@@ -218,17 +218,28 @@ public abstract class Entity : MonoBehaviour
     }
     public void EnteredOrange()
     {
-        speedModifierPercent = _speedInOrangePercent;
-        if (AgentExists()) agent.speed = Speed;
+        if (AgentExists())
+        {
+            speedModifierPercent = _speedInOrangePercent;
+            agent.speed = Speed;
+        }
         //SlowedWalkAnim
     }
     public void SetSpeedToDefault()
     {
-        speedModifierPercent = 100;
-        if (AgentExists()) agent.speed = Speed;
+        if (AgentExists())
+        {
+            speedModifierPercent = 100;
+            agent.speed = Speed;
+            Debug.Log(Speed);
+        }
         //NormalWalkAnim
     }
-    bool AgentExists() => agent != null;
+    bool AgentExists()
+    {
+        Debug.Log(agent);
+        return agent != null;
+    }
 
     void OnTriggerStay2D(Collider2D collision)
     {

@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DebuffingName: 
-  _speed: 5
+  _speed: 7
   _maxHealth: 1
   _AITick: 0.1
   _fuelCostMultiplierInOrange: 0
@@ -213,7 +213,7 @@ MonoBehaviour:
   MeshToFlip: {fileID: 5102715225591570463}
   playerDetectCollider: {fileID: 443609855}
   attackObjectGO: {fileID: 3515490172440334485, guid: 9581853e7699a2c45bfb0494ecbfcfb0, type: 3}
-  attackDuration: 0.5
+  attackDuration: 1
   animator: {fileID: 940092610}
   glowAnimator: {fileID: 1220632235}
   target: {x: 0, y: 0}
@@ -248,7 +248,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5102715225591570459}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

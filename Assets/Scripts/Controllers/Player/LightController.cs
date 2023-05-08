@@ -102,7 +102,9 @@ public class LightController : MonoBehaviour
         EnemiesInOuterArea = newList;
         newList = new List<Entity>();
 
+        
         innerCollider.OverlapCollider(filter, inner_overlappedColliders);
+        Debug.Log(inner_overlappedColliders);
         foreach (Collider2D collider in inner_overlappedColliders)
         {
             if (collider.gameObject.TryGetComponent(out Entity outEntity) == false)
@@ -179,7 +181,7 @@ public class LightController : MonoBehaviour
 
     void EntityEnteredInner(Entity entity)
     {
-        //Debug.Log(entity + " has entered inner");
+        Debug.Log(entity + " has entered inner");
         entity.EnteredOrange();
 
         if (fuelController != null) 
