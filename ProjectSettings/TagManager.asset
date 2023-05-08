@@ -49,6 +49,9 @@ TagManager:
   - name: Player
     uniqueID: 4049677543
     locked: 0
+  - name: Entry
+    uniqueID: 1949726023
+    locked: 0
   - name: Lantern
     uniqueID: 3437819543
     locked: 0
