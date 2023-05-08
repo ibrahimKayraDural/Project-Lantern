@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class TopDownCharacterController : MonoBehaviour
@@ -22,6 +23,7 @@ public class TopDownCharacterController : MonoBehaviour
 
     void Update()
     {
+        //Take input
         Vector2 movementVector = GetInputVector();
 
         bool anim_isMoving = Mathf.Abs(movementVector.x) > .1f || Mathf.Abs(movementVector.y) > .1f;
@@ -36,6 +38,7 @@ public class TopDownCharacterController : MonoBehaviour
         //Apply animation
         animator.SetBool("isMoving", anim_isMoving);
 
+        //Apply Physics
         rb.MovePosition(targetPosition);
     }
 
@@ -69,23 +72,28 @@ public class TopDownCharacterController : MonoBehaviour
     {
         Vector2 inputVector = Vector2.zero;
 
+        //Am i holding a key down
         bool IsHolding_left = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
         bool IsHolding_right = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
         bool IsHolding_up = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
         bool IsHolding_down = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
 
+        //When did i pressed it
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) { PressTime_left = Time.time; }
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) { PressTime_right = Time.time; }
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) { PressTime_up = Time.time; }
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) { PressTime_down = Time.time; }
 
+        //Apply the info to inputVector
         if (IsHolding_left) inputVector.x = -1;
         if (IsHolding_right) inputVector.x = 1;
         if (IsHolding_up) inputVector.y = 1;
         if (IsHolding_down) inputVector.y = -1;
 
+        //If keys conflict, apply the one that i pressed first
         if (IsHolding_left && IsHolding_right) inputVector.x = PressTime_left >= PressTime_right ? -1 : 1;
         if (IsHolding_up && IsHolding_down) inputVector.y = PressTime_up >= PressTime_down ? 1 : -1;
+
 
         inputVector.Normalize();
 

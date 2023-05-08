@@ -1066,6 +1066,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OHTHEMISERY
       objectReference: {fileID: 0}
+    - target: {fileID: 5102715225591570459, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5102715225591570463, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
       propertyPath: m_RootOrder
       value: 4
