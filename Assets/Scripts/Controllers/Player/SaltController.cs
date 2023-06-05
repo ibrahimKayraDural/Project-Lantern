@@ -65,9 +65,6 @@ public class SaltController : MonoBehaviour
                 TrySetDebugTextWithColor(GetColorName(CurrentColor), CurrentColor);
             } 
         }
-        string sactive = isActivated ? "T " : "F ";
-        sactive += $"Time => {Time.time}, Next => {nextUse_TargetTime}, End => {end_TargetTime}";
-        Debug.Log(sactive);
     }
 
     void DeactivateSalts()
@@ -106,12 +103,19 @@ public class SaltController : MonoBehaviour
 
         return colorName;
     }
+    LightColorType GetColorType(Color color)
+    {
+        if (color.r == 1) return LightColorType.Red;
+        if (color.g == 1) return LightColorType.Green;
+        if (color.b == 1) return LightColorType.Blue;
+        else return LightColorType.Default;
+    }
 
     bool TrySetLightColor(Color color)
     {
         if (lightController == null) return false;
 
-        lightController.SetOuterLightColor(color);
+        lightController.SetOuterLightColor(color, GetColorType(color));
         return true;
     }
     bool TryResetLightColor()

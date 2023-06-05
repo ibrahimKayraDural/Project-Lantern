@@ -31,7 +31,7 @@ public class LightController : MonoBehaviour
     [SerializeField] float innerIntensity = .8f;
     [SerializeField] float redIntensity = 2f;
 
-    
+    LightColorType light_ColorType = LightColorType.Default;
 
     List<Entity> EnemiesInOuterArea = new List<Entity>();
     List<Entity> EnemiesInInnerArea = new List<Entity>();
@@ -167,12 +167,14 @@ public class LightController : MonoBehaviour
             }
         }
     }
-    public void SetOuterLightColor(Color colorToSet)
+    public void SetOuterLightColor(Color colorToSet, LightColorType type)
     {
+        light_ColorType = type;
         outerLight.color = colorToSet;
     }
     public void ResetOuterLightColor()
     {
+        light_ColorType = LightColorType.Default;
         outerLight.color = outerColor;
     }
 
