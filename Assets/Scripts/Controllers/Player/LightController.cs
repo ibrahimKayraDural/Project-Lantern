@@ -104,7 +104,6 @@ public class LightController : MonoBehaviour
 
         
         innerCollider.OverlapCollider(filter, inner_overlappedColliders);
-        Debug.Log(inner_overlappedColliders);
         foreach (Collider2D collider in inner_overlappedColliders)
         {
             if (collider.gameObject.TryGetComponent(out Entity outEntity) == false)
@@ -167,6 +166,14 @@ public class LightController : MonoBehaviour
                 }
             }
         }
+    }
+    public void SetOuterLightColor(Color colorToSet)
+    {
+        outerLight.color = colorToSet;
+    }
+    public void ResetOuterLightColor()
+    {
+        outerLight.color = outerColor;
     }
 
     private static void EntityEnteredOuter(Entity entity)
