@@ -13,6 +13,7 @@ public class SaltController : MonoBehaviour
     [Header("Values")]
     [SerializeField] float saltDuration = 5;
     [SerializeField] float saltCooldown = 5;
+    [SerializeField] float deactivationCooldown = 1;
     [SerializeField] Color[] colors;
 
     public Color CurrentColor { get; private set; }
@@ -21,6 +22,7 @@ public class SaltController : MonoBehaviour
 
 
     int currentColorindex;
+    float deactivationTargetTime;
 
     //float end_TargetTime = float.MaxValue;
     //float nextUse_TargetTime;
@@ -51,6 +53,11 @@ public class SaltController : MonoBehaviour
         if (Input.GetButtonDown("Salt_Activate") && isActivated == false && SaltAmount == 1)
         {
             ActivateSalts();
+            deactivationTargetTime = Time.time + deactivationCooldown;
+        }
+        else if(Input.GetButtonDown("Salt_Activate") && isActivated == true && deactivationTargetTime <= Time.time)
+        {
+            DeactivateSalts();
         }
 
         if (isActivated)
