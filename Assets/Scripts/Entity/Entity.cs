@@ -11,8 +11,8 @@ public abstract class Entity : MonoBehaviour
     public enum MovementType { Normal, Locked}
 
 
-
-    public MovementType currentMovementType { get; private set; } = MovementType.Normal;
+    public MovementType currentMovementType { get; internal set; } = MovementType.Normal;
+    public LightColorType entityLightType { get; internal set; } = LightColorType.Default;
 
     public event EventHandler<TopDownCharacterController> Event_PlayerInRange;
 
@@ -37,6 +37,8 @@ public abstract class Entity : MonoBehaviour
 
     [Header("Values")]
     [SerializeField] internal float attackDuration = .5f;
+    [SerializeField] float hinderBonus = 1.5f;
+    [SerializeField] float damageBonus = 2f;
 
     internal float AttackTargetTime = float.MinValue;
 
@@ -84,6 +86,14 @@ public abstract class Entity : MonoBehaviour
     public void RecieveDamage(float damage)
     {
         _health = Mathf.Max(0, _health - damage);
+
+        if (_health == 0) Die();
+    }
+    public void RecieveDamage(float damage, LightColorType lightColor)
+    {
+        float temp_bonusDamage = lightColor == entityLightType ? damageBonus : 1;
+
+        _health = Mathf.Max(0, _health - damage * temp_bonusDamage);
 
         if (_health == 0) Die();
     }
@@ -208,17 +218,20 @@ public abstract class Entity : MonoBehaviour
         StartCoroutine(ChangeMovementTypeIEnum);
     }
     IEnumerator ChangeMovementTypeIEnum;
+
     IEnumerator SetMoveTypeAfterSeconds(MovementType type, float seconds)
     {
         yield return new WaitForSeconds(seconds);
         SetMovementType(type);
         ChangeMovementTypeIEnum = null;
     }
-    public void EnteredOrange()
+    public void EnteredOrange(LightColorType lightColor)
     {
         if (AgentExists())
         {
-            speedModifierPercent = _speedInOrangePercent;
+            float temp_bonusHinder = lightColor == entityLightType ? hinderBonus : 1;
+
+            speedModifierPercent = _speedInOrangePercent / temp_bonusHinder;
             agent.speed = Speed;
         }
         //SlowedWalkAnim
@@ -229,13 +242,11 @@ public abstract class Entity : MonoBehaviour
         {
             speedModifierPercent = 100;
             agent.speed = Speed;
-            Debug.Log(Speed);
         }
         //NormalWalkAnim
     }
     bool AgentExists()
     {
-        Debug.Log(agent);
         return agent != null;
     }
 

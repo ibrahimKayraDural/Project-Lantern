@@ -16,6 +16,9 @@ public class TestMonster : Entity
     internal override void Start()
     {
         base.Start();
+
+        entityLightType = LightColorType.Red;
+
         Event_PlayerInRange += AttackNow;//Use Attack
 
         target = transform.position;

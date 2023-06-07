@@ -6,6 +6,7 @@ using TMPro;
 public class SaltController : MonoBehaviour
 {
     [Header("Reference")]
+    [SerializeField] SaltSlider saltSlider;
     [SerializeField] LightController lightController;
     [SerializeField] TextMeshProUGUI debugText;
 
@@ -16,10 +17,13 @@ public class SaltController : MonoBehaviour
 
     public Color CurrentColor { get; private set; }
     public bool isActivated { get; private set; }
+    public float SaltAmount { get; private set; } = 1;
 
-    float end_TargetTime = float.MaxValue;
-    float nextUse_TargetTime;
+
     int currentColorindex;
+
+    //float end_TargetTime = float.MaxValue;
+    //float nextUse_TargetTime;
 
     void Start()
     {
@@ -28,21 +32,43 @@ public class SaltController : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetButtonDown("Salt_Activate") && nextUse_TargetTime < Time.time)//Left Shift
+        //if (Input.GetButtonDown("Salt_Activate") && nextUse_TargetTime < Time.time)//Left Shift
+        //{
+        //    ActivateSalts();
+
+        //    end_TargetTime = Time.time + saltDuration;
+        //    nextUse_TargetTime = float.MaxValue;
+        //}
+
+        //if (end_TargetTime < Time.time)
+        //{
+        //    DeactivateSalts();
+
+        //    end_TargetTime = float.MaxValue;
+        //    nextUse_TargetTime = Time.time + saltCooldown;
+        //}
+
+        if (Input.GetButtonDown("Salt_Activate") && isActivated == false && SaltAmount == 1)
         {
             ActivateSalts();
-
-            end_TargetTime = Time.time + saltDuration;
-            nextUse_TargetTime = float.MaxValue;
         }
 
-        if(end_TargetTime < Time.time)
+        if (isActivated)
         {
-            DeactivateSalts();
+            SaltAmount -= Time.deltaTime / saltDuration;
 
-            end_TargetTime = float.MaxValue;
-            nextUse_TargetTime = Time.time + saltCooldown;
+            if (SaltAmount <= 0)
+            {
+                SaltAmount = 0;
+                DeactivateSalts();
+            }
         }
+        else
+        {
+            SaltAmount += Time.deltaTime / saltCooldown;
+            SaltAmount = Mathf.Min(1, SaltAmount);
+        }
+
 
         if (isActivated == false)
         {
@@ -53,7 +79,8 @@ public class SaltController : MonoBehaviour
 
                 CurrentColor = colors[currentColorindex];
 
-                TrySetDebugTextWithColor(GetColorName(CurrentColor), CurrentColor);
+                TryChangeFillImage(CurrentColor);
+                //TrySetDebugTextWithColor(GetColorName(CurrentColor), CurrentColor);
             }
             else if (Input.GetButtonDown("Salt_Previous"))//Q
             {
@@ -62,12 +89,16 @@ public class SaltController : MonoBehaviour
 
                 CurrentColor = colors[currentColorindex];
 
-                TrySetDebugTextWithColor(GetColorName(CurrentColor), CurrentColor);
-            } 
+                TryChangeFillImage(CurrentColor);
+                //TrySetDebugTextWithColor(GetColorName(CurrentColor), CurrentColor);
+            }
         }
+
+        saltSlider.SetSliderValueZeroToOne(SaltAmount);
     }
 
     void DeactivateSalts()
+
     {
         isActivated = false;
 
@@ -80,6 +111,40 @@ public class SaltController : MonoBehaviour
         CurrentColor = colors[currentColorindex];
         TrySetLightColor(CurrentColor);
     }
+    LightColorType GetColorType(Color color)
+    {
+        float maxComp = color.maxColorComponent;
+
+        if (color.r == maxComp) return LightColorType.Red;
+        if (color.g == maxComp) return LightColorType.Green;
+        if (color.b == maxComp) return LightColorType.Blue;
+        else return LightColorType.Default;
+    }
+    bool TrySetLightColor(Color color)
+    {
+        if (lightController == null) return false;
+
+        lightController.SetOuterLightColor(color, GetColorType(color));
+        return true;
+    }
+    bool TryResetLightColor()
+    {
+        if (lightController == null) return false;
+
+        lightController.ResetOuterLightColor();
+        return true;
+    }
+    bool TryChangeFillImage(Color color)
+    {
+        if (saltSlider == null) return false;
+
+        LightColorType type = GetColorType(color);
+
+        saltSlider.ChangeSaltFillImage(type);
+        return true;
+    }
+
+    #region DebugStuff
     string GetColorName(Color color)
     {
         string colorName = "Unknown";
@@ -103,28 +168,6 @@ public class SaltController : MonoBehaviour
 
         return colorName;
     }
-    LightColorType GetColorType(Color color)
-    {
-        if (color.r == 1) return LightColorType.Red;
-        if (color.g == 1) return LightColorType.Green;
-        if (color.b == 1) return LightColorType.Blue;
-        else return LightColorType.Default;
-    }
-
-    bool TrySetLightColor(Color color)
-    {
-        if (lightController == null) return false;
-
-        lightController.SetOuterLightColor(color, GetColorType(color));
-        return true;
-    }
-    bool TryResetLightColor()
-    {
-        if (lightController == null) return false;
-
-        lightController.ResetOuterLightColor();
-        return true;
-    }
     bool TrySetDebugText(string value)
     {
         if (debugText == null) return false;
@@ -140,4 +183,5 @@ public class SaltController : MonoBehaviour
         debugText.color = color;
         return true;
     }
+    #endregion
 }

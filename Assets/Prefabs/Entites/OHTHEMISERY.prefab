@@ -214,6 +214,8 @@ MonoBehaviour:
   playerDetectCollider: {fileID: 443609855}
   attackObjectGO: {fileID: 3515490172440334485, guid: 9581853e7699a2c45bfb0494ecbfcfb0, type: 3}
   attackDuration: 1
+  hinderBonus: 10
+  damageBonus: 2
   animator: {fileID: 940092610}
   glowAnimator: {fileID: 1220632235}
   target: {x: 0, y: 0}
@@ -324,7 +326,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 815db2a2262ae8d43bf5216b28582304, type: 2}
+  - {fileID: 2100000, guid: e4d0b6604bfbff840b18cf0779720321, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

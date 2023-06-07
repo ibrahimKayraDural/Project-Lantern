@@ -171,14 +171,30 @@ public class LightController : MonoBehaviour
     {
         light_ColorType = type;
         outerLight.color = colorToSet;
+
+        RefreshCollidedEntities();
     }
     public void ResetOuterLightColor()
     {
         light_ColorType = LightColorType.Default;
         outerLight.color = outerColor;
+
+        RefreshCollidedEntities();
     }
 
-    private static void EntityEnteredOuter(Entity entity)
+    void RefreshCollidedEntities()
+    {
+        foreach(Entity e in EnemiesInOuterArea)
+        {
+            EntityEnteredOuter(e);
+        }
+        foreach (Entity e in EnemiesInInnerArea)
+        {
+            EntityEnteredInner(e);
+        }
+    }
+
+    private static void EntityEnteredOuter(Entity entity)//Also enters here when salt is enabled
     {
         //Debug.Log(entity + " has entered outer");
     }
@@ -188,10 +204,9 @@ public class LightController : MonoBehaviour
         //Debug.Log(entity + " has exited outer");
     }
 
-    void EntityEnteredInner(Entity entity)
+    void EntityEnteredInner(Entity entity)//Also enters here when salt is enabled
     {
-        Debug.Log(entity + " has entered inner");
-        entity.EnteredOrange();
+        entity.EnteredOrange(light_ColorType);
 
         if (fuelController != null) 
         {
@@ -201,8 +216,6 @@ public class LightController : MonoBehaviour
 
     void EntityExitedInner(Entity entity)
     {
-        //Debug.Log(entity + " has exited inner");
-
         entity.SetSpeedToDefault();
 
         if (fuelController != null)
