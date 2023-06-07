@@ -478,7 +478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1096,6 +1096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 1635576905}
   fillImage: {fileID: 1477763089}
+  emission: {fileID: 945026949}
   SaltImage_Red: {fileID: 21300000, guid: db10085162489b042ab6860555272015, type: 3}
   SaltImage_Green: {fileID: 21300000, guid: 0c5515f7982f4504a8d9f7df3228967f, type: 3}
   SaltImage_Blue: {fileID: 21300000, guid: d2f4f01c78ac3124f87a5539f1a5ea64, type: 3}
@@ -1457,6 +1458,10 @@ PrefabInstance:
     - target: {fileID: 5102715225591570459, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
       propertyPath: m_Name
       value: OHTHEMISERY
+      objectReference: {fileID: 0}
+    - target: {fileID: 5102715225591570459, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5102715225591570463, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
       propertyPath: m_RootOrder
