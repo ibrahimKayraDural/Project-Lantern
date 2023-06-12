@@ -4,75 +4,146 @@ using UnityEngine;
 
 public class LanternLeaper : Entity
 {
-    [Header("Targeting")]
-    [SerializeField] Vector2 target;
+    public enum State
+    {
+        Chase,
+        Charging,
+        Attack,
+        Hurt,
+        Dead
+    }
+
+    [Header("Reference")]
+    [SerializeField] LayerMask lanternLayer;
 
     [Header("LanternLeaperStats")]
-    [SerializeField] float LeapRange;
-    [SerializeField] float LeapForce;
-    [SerializeField] float LeapAnticipation;
-
-    float leapTime;
-
+    [SerializeField] float FuelCostDamage = 2.5f;
+    [SerializeField] float LeapRange = 2;
+    [SerializeField] float LeapDuration = 1;
+    [SerializeField] float LeapSpeedBonusPercent = 500;
+    [SerializeField] float LeapAnticipation = 2.5f;
+    [SerializeField] float LeapDamagingArea = 1f;
+    
+    Vector2 target;
     State _state = State.Chase;
+
+    float TargetTime_attackStart = float.MaxValue;
+    float TargetTime_attackEnd = float.MinValue;
+    bool isCharging;
+    bool hasDamagedThisLeap;
+    Vector3 leapDirection;
+
     internal override void Start()
     {
         base.Start();
-        leapTime = LeapAnticipation;
     }
-
     internal override void Update()
     {
         base.Update();
         SelectDestination();
 
-        Debug.Log(_state);
+        if (Time.time >= TargetTime_attackStart)
+        {
+            _state = State.Attack;
+            TargetTime_attackStart = float.MaxValue;
+        }
 
         switch (_state)
         {
             case State.Chase:
-                //AIMovementTo(target);
+
+                AIMovementTo(target);
+
+                if (DistanceWithTarget() <= LeapRange)
+                {
+                    _state = State.Charging;
+                }
+
                 break;
-            case State.Ready:
+
+            case State.Charging:
+
+                if (isCharging) break;
+
+                isCharging = true;
+
+                LockMovementForSeconds(LeapAnticipation, (MovementType mType) => _state = State.Attack);
+
                 break;
+
             case State.Attack:
-                rb.velocity = target - new Vector2(transform.position.x, transform.position.y).normalized * LeapForce;
+
+                if (isCharging)
+                {
+                    isCharging = false;
+
+                    leapDirection = target - (Vector2)transform.position;
+                    SetSpeedBonusPercent(LeapSpeedBonusPercent);
+
+                    isHinderable = false;
+                    TargetTime_attackEnd = Time.time + LeapDuration;
+                }
+
+                //Vector2 rayVector = target - (Vector2)transform.position;
+                //RaycastHit2D hit = Physics2D.Raycast(transform.position, rayVector.normalized, LeapTime, 1 << 0);// 1 << 0 == defaultLayer 
+                //Vector3 targetVector = hit.collider == null ? target : hit.point;
+
+                Vector3 targetVector = transform.position + leapDirection;
+                AIMovementTo(targetVector);
+                TryDamageLantern();
+
+                if (Time.time >= TargetTime_attackEnd)
+                {
+                    SetSpeedBonusToDefault();
+                    isHinderable = true;
+                    hasDamagedThisLeap = false;
+
+                    _state = State.Chase;
+                }
+
                 break;
+
             case State.Hurt:
                 break;
+
             case State.Dead:
                 break;
         }
-
-        if ((target - new Vector2(transform.position.x, transform.position.y)).magnitude > LeapRange && leapTime == LeapAnticipation /*&& _state != State.Ready && _state != State.Attack && _state != State.Hurt && _state != State.Dead*/)
-        {
-            _state = State.Chase;
-        }
-
-        else if ((target - new Vector2(transform.position.x, transform.position.y)).magnitude <= LeapRange && leapTime == LeapAnticipation /*&& _state != State.Attack*/)
-        {
-            _state = State.Ready;
-             leapTime += Time.time;
-        }
-
-        else if (leapTime <= Time.time && leapTime != LeapAnticipation /*&& rb.velocity.magnitude < 1*/)
-        {
-            leapTime = LeapAnticipation;
-            _state = State.Attack;
-        }
     }
 
-    enum State 
+    bool TryDamageLantern()
     {
-        Chase,
-        Ready,
-        Attack,
-        Hurt,
-        Dead
+        if (hasDamagedThisLeap) return false;
 
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, LeapDamagingArea, lanternLayer);
+        
+        foreach(Collider2D col in colliders)
+        {
+            if (col.TryGetComponent(out FuelController fc))
+            {
+                if (col != fc.MeshCollider) continue;
+
+                fc.RemoveFuel(FuelCostDamage);
+                hasDamagedThisLeap = true;
+
+                Debug.Log("Damaged " + col.gameObject.name);
+
+                return true;
+            }
+        }
+
+        return false;
     }
     void SelectDestination()
     {
         target = GameManager.instance.GetLanternPosition();
+    }
+    float DistanceWithTarget() => Vector3.Distance(transform.position, target);
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, LeapRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, LeapDamagingArea);
     }
 }

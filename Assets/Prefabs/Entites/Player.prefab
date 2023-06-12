@@ -711,6 +711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FuelSlider: {fileID: 4115387736602356572}
+  _meshCollider: {fileID: 3074031881172078424}
   MaxFuel: 10
   RegenDefaultPerSecond: 2
   SpendDefaultPerSecond: 4

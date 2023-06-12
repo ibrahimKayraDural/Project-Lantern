@@ -4,4 +4,10 @@ using UnityEngine;
 
 public class Enums : MonoBehaviour
 {}
-public enum LightColorType { Default, Red, Green, Blue };
+public enum LightColorType
+{
+    Default,
+    Red,
+    Green,
+    Blue
+}

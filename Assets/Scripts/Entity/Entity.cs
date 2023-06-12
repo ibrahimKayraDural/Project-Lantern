@@ -16,7 +16,8 @@ public abstract class Entity : MonoBehaviour
 
     public event EventHandler<TopDownCharacterController> Event_PlayerInRange;
 
-    public bool isDead { get; private set; } = false;
+    public bool isDead { get; internal set; } = false;
+    public bool isHinderable { get; internal set; } = true;
     
     public float FuelCostMulti => _fuelCostMultiplierInOrange;
 
@@ -45,7 +46,7 @@ public abstract class Entity : MonoBehaviour
     internal float _health = 1;
     public float MaxHealth { get => _maxHealth; set => _maxHealth = Mathf.Max(value, 1); }
     public float Health { get => _health; }
-    public float Speed { get => _speed * speedModifierPercent / 100; }
+    public float Speed { get => _speed * speedModifierPercent / 100 * speedBonusPercent / 100; }
 
     Transform followingTransform;
     internal Rigidbody2D rb;
@@ -53,6 +54,7 @@ public abstract class Entity : MonoBehaviour
     internal bool isLookingLeft;
     internal float moveTargetTime = 1;
     internal float speedModifierPercent = 100;
+    internal float speedBonusPercent = 100;
 
     internal virtual void Start()
     {
@@ -185,7 +187,9 @@ public abstract class Entity : MonoBehaviour
         agent.SetDestination(targetPosition);
 
         moveTargetTime = Time.time + _AITick;
+        rb.velocity = Vector2.zero;
     }
+
     void Die() 
     { 
         isDead = true;
@@ -209,25 +213,47 @@ public abstract class Entity : MonoBehaviour
     }
     public void SetMovementType(MovementType setTo) => currentMovementType = setTo;
 
-    public void LockMovementForSeconds(float seconds)
+
+    internal delegate void del_MethodToInvoke(MovementType movementType);
+    internal void LockMovementForSeconds(float seconds, del_MethodToInvoke methodToInvoke = null)
     {
         if (ChangeMovementTypeIEnum != null) StopCoroutine(ChangeMovementTypeIEnum);
 
+        SetAIStopped(true);
+
         SetMovementType(MovementType.Locked);
-        ChangeMovementTypeIEnum = SetMoveTypeAfterSeconds(MovementType.Normal, seconds);
+
+        if (methodToInvoke == null)
+            ChangeMovementTypeIEnum = SetMoveTypeAfterSeconds(MovementType.Normal, seconds);
+        else
+            ChangeMovementTypeIEnum = SetMoveTypeAfterSeconds(MovementType.Normal, seconds, methodToInvoke);
+
         StartCoroutine(ChangeMovementTypeIEnum);
     }
     IEnumerator ChangeMovementTypeIEnum;
 
-    IEnumerator SetMoveTypeAfterSeconds(MovementType type, float seconds)
+    internal void SetAIStopped(bool value) => agent.isStopped = value;
+
+    IEnumerator SetMoveTypeAfterSeconds(MovementType type, float seconds, del_MethodToInvoke methodToInvoke = null)
     {
         yield return new WaitForSeconds(seconds);
+
+        switch (type)
+        {
+            case MovementType.Locked: SetAIStopped(true); break;
+
+            case MovementType.Normal: SetAIStopped(false); break;
+        }
+
         SetMovementType(type);
         ChangeMovementTypeIEnum = null;
+
+        methodToInvoke?.Invoke(type);
     }
+
     public void EnteredOrange(LightColorType lightColor)
     {
-        if (AgentExists())
+        if (AgentExists() && isHinderable)
         {
             float temp_bonusHinder = lightColor == entityLightType ? hinderBonus : 1;
 
@@ -236,7 +262,7 @@ public abstract class Entity : MonoBehaviour
         }
         //SlowedWalkAnim
     }
-    public void SetSpeedToDefault()
+    public void SetSpeedModifierToDefault()
     {
         if (AgentExists())
         {
@@ -245,6 +271,24 @@ public abstract class Entity : MonoBehaviour
         }
         //NormalWalkAnim
     }
+
+    public void SetSpeedBonusPercent(float value)
+    {
+        if (AgentExists())
+        {
+            speedBonusPercent = value;
+            agent.speed = Speed;
+        }
+    }
+    public void SetSpeedBonusToDefault()
+    {
+        if (AgentExists())
+        {
+            speedBonusPercent = 100;
+            agent.speed = Speed;
+        }
+    }
+
     bool AgentExists()
     {
         return agent != null;

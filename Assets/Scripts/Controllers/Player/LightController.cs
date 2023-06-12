@@ -216,7 +216,7 @@ public class LightController : MonoBehaviour
 
     void EntityExitedInner(Entity entity)
     {
-        entity.SetSpeedToDefault();
+        entity.SetSpeedModifierToDefault();
 
         if (fuelController != null)
         {

@@ -9,11 +9,17 @@ public class FuelController : MonoBehaviour
 {
     public event EventHandler<bool> Event_OnFuelHasDepleted;
 
-    [SerializeField] Slider FuelSlider;
 
-    [SerializeField] float MaxFuel = 50;
-    [SerializeField] float RegenDefaultPerSecond = 0.25f;
-    [SerializeField] float SpendDefaultPerSecond = 1f;
+    [Header("Reference")]
+    [SerializeField] Slider FuelSlider;
+    [SerializeField] Collider2D _meshCollider;
+
+    public Collider2D MeshCollider => _meshCollider;
+
+    [Header("Values")]
+    [SerializeField] float MaxFuel = 10;
+    [SerializeField] float RegenDefaultPerSecond = 2f;
+    [SerializeField] float SpendDefaultPerSecond = 4f;
     [SerializeField] float RegenHinderPercent = 50;
     [SerializeField] float RegenStartCooldown = 1;
     [SerializeField] float RegainLightPercent = 50;
