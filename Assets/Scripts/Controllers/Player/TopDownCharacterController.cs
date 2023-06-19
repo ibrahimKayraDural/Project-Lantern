@@ -15,12 +15,20 @@ public class TopDownCharacterController : MonoBehaviour
 
     [Header("Variables")]
     [SerializeField] float speed = 20f;
+    [SerializeField] int maxHealth = 2;
+    [SerializeField] int woundedAtHealthPercent = 50; //Get wounded when health is at this percent lol
 
     bool isLookingLeft;
-    int health = 2;
+
+    int _health;
+    public int Health => _health;
 
     float PressTime_left, PressTime_right, PressTime_up, PressTime_down;
 
+    private void Start()
+    {
+        _health = maxHealth;
+    }
     void Update()
     {
         //Take input
@@ -44,9 +52,10 @@ public class TopDownCharacterController : MonoBehaviour
 
     public void GetDamaged()
     {
-        health--;
+        _health--;
 
-        if (health <= 0) Die();
+        if (_health <= 0) Die();
+        else if (_health <= maxHealth * woundedAtHealthPercent / 100) BecomeWounded();
     }
     void Die()
     {
@@ -66,6 +75,10 @@ public class TopDownCharacterController : MonoBehaviour
         }
 
         this.enabled = false;
+    }
+    void BecomeWounded()
+    {
+        animator.SetBool("isWounded", true);
     }
 
     Vector2 GetInputVector()
