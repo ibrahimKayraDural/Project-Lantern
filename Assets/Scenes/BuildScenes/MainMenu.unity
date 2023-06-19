@@ -509,7 +509,7 @@ MonoBehaviour:
     dontLoop: 0
     dontPersist: 0
   - levelIndexesToPlay: 01000000
-    songToPlay: {fileID: 8300000, guid: 8e5b6a482997b1147bde37ebb3b6902c, type: 3}
+    songToPlay: {fileID: 8300000, guid: 75d5e296fa60e4f4989b77625ac8b866, type: 3}
     dontLoop: 0
     dontPersist: 0
   currentLevelSong:
