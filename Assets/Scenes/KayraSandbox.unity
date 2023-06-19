@@ -412,7 +412,7 @@ PrefabInstance:
     - target: {fileID: 7465102146580931072, guid: 569daf907e9b5504a9d95717d07120f7, type: 3}
       propertyPath: entityToSpawn
       value: 
-      objectReference: {fileID: 5102715225591570459, guid: 293df397707ed3d4e8379227e0b6dcb3, type: 3}
+      objectReference: {fileID: 5102715225591570459, guid: 54443c70fea5abf4cbc08800f65240af, type: 3}
     - target: {fileID: 7465102146580931073, guid: 569daf907e9b5504a9d95717d07120f7, type: 3}
       propertyPath: m_Name
       value: 'Spawner '

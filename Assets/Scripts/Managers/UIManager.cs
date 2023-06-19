@@ -54,8 +54,6 @@ public class UIManager : MonoSingleton<UIManager>
     {
         if (gameIsPaused) UnpauseGame();
         else PauseGame();
-
-        Debug.Log(gameIsPaused);
     }
 
     public void ShowOrHideCursor(bool show)

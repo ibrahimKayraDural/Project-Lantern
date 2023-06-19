@@ -4,22 +4,33 @@ using UnityEngine;
 
 public class AmbushAudio : MonoBehaviour
 {
-    Vector2 PPos;
-    float cumDistance;
-    [SerializeField] float AudioRange;
+    Transform PlayerTransform;
+    [SerializeField] float AudioRange = 10;
+    [SerializeField] float MaxAudio = 1;
     [SerializeField] AudioSource AS;
     void Start()
     {
-        PPos = GameManager.instance.GetPlayerPosition();
+        PlayerTransform = GameManager.instance.GetPlayerTransform();
     }
 
     // Update is called once per frame
     void Update()
     {
-        cumDistance = gameObject.transform.position.magnitude - PPos.magnitude;
-        if (cumDistance < AudioRange)
+        float TargetDistance = Vector2.Distance(PlayerTransform.position, transform.position);
+        TargetDistance = Mathf.Clamp(TargetDistance, 0, AudioRange);
+        TargetDistance = Mathf.InverseLerp(0, AudioRange, TargetDistance);
+        TargetDistance = 1 - TargetDistance;
+
+        AS.volume = Mathf.Lerp(0, MaxAudio, TargetDistance);
+
+        if(AS.isPlaying == false)
         {
-            AS.Play();
+            ReplayAudio();
         }
+    }
+
+    void ReplayAudio()
+    {
+        AS.Play();
     }
 }
