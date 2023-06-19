@@ -475,6 +475,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2955724322254289304}
     - target: {fileID: 716716248325138644, guid: ee69423b2e88c7742946d17df43428be, type: 3}
+      propertyPath: pickupEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 716716248325138644, guid: ee69423b2e88c7742946d17df43428be, type: 3}
       propertyPath: pickupEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
