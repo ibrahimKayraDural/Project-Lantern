@@ -57,6 +57,13 @@ public class TopDownCharacterController : MonoBehaviour
         if (_health <= 0) Die();
         else if (_health <= maxHealth * woundedAtHealthPercent / 100) BecomeWounded();
     }
+    public void HealPlayer()
+    {
+        _health = Mathf.Min(maxHealth, _health + 1);
+
+        if (_health >= maxHealth * woundedAtHealthPercent / 100) BecomeUnwounded();
+    }
+
     void Die()
     {
         Event_OnDeath?.Invoke(this, true);
@@ -79,6 +86,10 @@ public class TopDownCharacterController : MonoBehaviour
     void BecomeWounded()
     {
         animator.SetBool("isWounded", true);
+    }
+    void BecomeUnwounded()
+    {
+        animator.SetBool("isWounded", false);
     }
 
     Vector2 GetInputVector()

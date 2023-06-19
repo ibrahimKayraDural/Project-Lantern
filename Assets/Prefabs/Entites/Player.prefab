@@ -1743,7 +1743,6 @@ GameObject:
   - component: {fileID: 7592177811047884897}
   - component: {fileID: 7592177811047884896}
   - component: {fileID: 7592177811047884899}
-  - component: {fileID: 1217340573901850527}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1789,6 +1788,8 @@ MonoBehaviour:
   animator: {fileID: 2869230696805861158}
   transformToFlip: {fileID: 7592177810442508834}
   speed: 30
+  maxHealth: 2
+  woundedAtHealthPercent: 50
 --- !u!50 &7592177811047884896
 Rigidbody2D:
   serializedVersion: 4
@@ -1826,19 +1827,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.000000484443, y: -0.5638017}
   m_Size: {x: 0.9731002, y: 0.68081003}
   m_Direction: 1
---- !u!114 &1217340573901850527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7592177811047884898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 736aad65641c614479ad3709b652f5cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  KeyCount: 0
 --- !u!1 &8467783833398025693
 GameObject:
   m_ObjectHideFlags: 0
