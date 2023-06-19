@@ -36,7 +36,7 @@ public class TopDownCharacterController : MonoBehaviour
 
         bool anim_isMoving = Mathf.Abs(movementVector.x) > .1f || Mathf.Abs(movementVector.y) > .1f;
 
-        movementVector *= speed * Time.deltaTime;
+        movementVector = movementVector * speed * Time.deltaTime;
 
         if (isLookingLeft && movementVector.x > 0) Flip();
         else if (isLookingLeft == false && movementVector.x < 0) Flip();
