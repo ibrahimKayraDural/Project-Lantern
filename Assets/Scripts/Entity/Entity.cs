@@ -38,8 +38,8 @@ public abstract class Entity : MonoBehaviour
 
     [Header("Values")]
     [SerializeField] internal float attackDuration = .5f;
-    [SerializeField] float hinderBonus = 1.5f;
-    [SerializeField] float damageBonus = 2f;
+    [SerializeField] internal float hinderBonus = 1.5f;
+    [SerializeField] internal float damageBonus = 2f;
 
     internal float AttackTargetTime = float.MinValue;
 

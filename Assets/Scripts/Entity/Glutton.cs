@@ -20,6 +20,7 @@ public class Glutton : Entity
     float nextAttack_TargetTime;
     float lastDeltaTime = .005f;
     bool inOrange;
+    bool lightMatch;
 
     internal override void Start()
     {
@@ -51,7 +52,9 @@ public class Glutton : Entity
     {
         if (transform.localScale.x <= 0 || transform.localScale.y <= 0) Die();
 
-        Vector3 targetScale = transform.localScale - new Vector3(1, 1, 0) * amount;
+        float bonusDamageValue = lightMatch ? damageBonus : 1;
+
+        Vector3 targetScale = transform.localScale - new Vector3(1, 1, 0) * amount * bonusDamageValue;
 
         if(targetScale.x <= 0.1f || targetScale.y <= 0.1f)
         {
@@ -80,10 +83,14 @@ public class Glutton : Entity
 
     public override void EnteredOrange(LightColorType lightColor)
     {
+        lightMatch = lightColor == entityLightType;
+
         inOrange = true;
     }
     public override void ExitedOrange()
     {
+        lightMatch = false;
+
         inOrange = false;
     }
     public override void RecieveDamage(float damage) { }
