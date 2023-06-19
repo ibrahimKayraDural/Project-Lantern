@@ -469,7 +469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4077235741988762611, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10.000001
+      value: 13.000003
       objectReference: {fileID: 0}
     - target: {fileID: 4174751222659392218, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
@@ -616,7 +616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4077235741988762611, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 8.5
+      value: 33.5
       objectReference: {fileID: 0}
     - target: {fileID: 5751278583047686826, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_Name
@@ -681,7 +681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4077235741988762611, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 14.5
+      value: 19.75
       objectReference: {fileID: 0}
     - target: {fileID: 4174751222659392218, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
@@ -755,7 +755,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4077235741988762611, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 14.499999
+      value: 18.5
       objectReference: {fileID: 0}
     - target: {fileID: 4174751222659392218, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
@@ -1031,6 +1031,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4077235741988762611, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 8.25
+      objectReference: {fileID: 0}
     - target: {fileID: 5751278583047686826, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_Name
       value: Wall (4)
@@ -1101,6 +1105,10 @@ PrefabInstance:
     - target: {fileID: 2179584013187522769, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077235741988762611, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 14.5
       objectReference: {fileID: 0}
     - target: {fileID: 5751278583047686826, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_Name
@@ -1656,7 +1664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4077235741988762611, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10.500001
+      value: 16.75
       objectReference: {fileID: 0}
     - target: {fileID: 4174751222659392218, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
@@ -1763,7 +1771,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &952351420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3055,7 +3063,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4077235741988762611, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 14.499999
+      value: 18.5
       objectReference: {fileID: 0}
     - target: {fileID: 4174751222659392218, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
@@ -3206,7 +3214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4077235741988762611, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 18.75
+      value: 28.25
       objectReference: {fileID: 0}
     - target: {fileID: 4174751222659392218, guid: 760d36e7331de2f48812c8e4aa828d2f, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
