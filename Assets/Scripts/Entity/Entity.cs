@@ -85,6 +85,10 @@ public abstract class Entity : MonoBehaviour
         playerDetectCollider.radius = playerDetectRange;
     }
 
+    public virtual void IsInRed(float damage)
+    {
+        RecieveDamage(damage);
+    }
     public virtual void RecieveDamage(float damage)
     {
         _health = Mathf.Max(0, _health - damage);
@@ -190,7 +194,7 @@ public abstract class Entity : MonoBehaviour
         rb.velocity = Vector2.zero;
     }
 
-    void Die() 
+    internal virtual void Die() 
     { 
         isDead = true;
         //DieAnim
@@ -253,6 +257,11 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void EnteredOrange(LightColorType lightColor)
     {
+        HinderEntity(lightColor);
+    }
+
+    void HinderEntity(LightColorType lightColor)
+    {
         if (AgentExists() && isHinderable)
         {
             float temp_bonusHinder = lightColor == entityLightType ? hinderBonus : 1;
@@ -262,12 +271,13 @@ public abstract class Entity : MonoBehaviour
         }
         //SlowedWalkAnim
     }
-    public void SetSpeedModifierToDefault()
+
+    public virtual void ExitedOrange()
     {
-        aa();
+        SetSpeedModifierToDefault();
     }
 
-    void aa()
+    void SetSpeedModifierToDefault()
     {
         if (AgentExists())
         {

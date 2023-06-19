@@ -112,11 +112,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5102715225591570463}
+  - component: {fileID: 443609855}
   - component: {fileID: 5102715225591570457}
   - component: {fileID: 2811419043142644480}
   - component: {fileID: 5102715225591570456}
-  - component: {fileID: 443609855}
-  m_Layer: 9
+  - component: {fileID: 436165481}
+  m_Layer: 13
   m_Name: Glutton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -138,6 +139,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &443609855
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5102715225591570459}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.8
 --- !u!50 &5102715225591570457
 Rigidbody2D:
   serializedVersion: 4
@@ -187,6 +204,14 @@ MonoBehaviour:
   animator: {fileID: 940092610}
   glowAnimator: {fileID: 1220632235}
   MonsterLightColor: 2
+  attackCollider: {fileID: 436165481}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  growthSpeed: 1
+  shrinkSpeed: 0.5
+  attackCooldown: 1
+  maxScale: 10
 --- !u!195 &5102715225591570456
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -209,7 +234,7 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!58 &443609855
+--- !u!58 &436165481
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -8,32 +8,60 @@ public class Glutton : Entity
     [SerializeField] Animator animator;
     [SerializeField] Animator glowAnimator;
     [SerializeField] LightColorType MonsterLightColor;
-
-    [SerializeField] GameObject magenta;
+    [SerializeField] CircleCollider2D attackCollider;
+    [SerializeField] LayerMask playerLayer;
 
     [Header("Values")]
     [SerializeField] float growthSpeed = 1;
+    [SerializeField] float shrinkSpeed = 1;
     [SerializeField] float attackCooldown = 1;
     [SerializeField] float maxScale = 10;
 
     float nextAttack_TargetTime;
+    float lastDeltaTime = .005f;
+    bool inOrange;
 
     internal override void Start()
     {
         base.Start();
 
         entityLightType = MonsterLightColor;
-
-        Event_PlayerInRange += Attack;
     }
 
     internal override void Update()
     {
         base.Update();
 
-        Grow(growthSpeed * Time.deltaTime);
+        Collider2D col = Physics2D.OverlapCircle(transform.position, attackCollider.radius * transform.lossyScale.x, playerLayer);
+        if (col != null)
+        {
+            if (col.gameObject.TryGetComponent(out TopDownCharacterController tdcc))
+                Attack(tdcc);
+        }
+
+        lastDeltaTime = Time.deltaTime;
+
+        if (inOrange == false)
+            Grow(growthSpeed * lastDeltaTime);
+        else
+            Shrink(shrinkSpeed * lastDeltaTime);
     }
 
+    void Shrink(float amount)
+    {
+        if (transform.localScale.x <= 0 || transform.localScale.y <= 0) Die();
+
+        Vector3 targetScale = transform.localScale - new Vector3(1, 1, 0) * amount;
+
+        if(targetScale.x <= 0.1f || targetScale.y <= 0.1f)
+        {
+            Die();
+        }
+        else
+        {
+            transform.localScale = targetScale;
+        }
+    }
     void Grow(float amount)
     {
         if (transform.localScale.x >= maxScale || transform.localScale.y >= maxScale) return;
@@ -41,19 +69,28 @@ public class Glutton : Entity
         transform.localScale = transform.localScale + new Vector3(1, 1, 0) * amount;
     }
 
-    void Attack(object sender, TopDownCharacterController playerCont)
+    void Attack(TopDownCharacterController playerCont)
     {
         if (nextAttack_TargetTime > Time.time) return;
 
         nextAttack_TargetTime = Time.time + attackCooldown;
 
-        Instantiate(magenta, playerCont.transform.position, Quaternion.identity);
+        Instantiate(attackObjectGO, playerCont.transform.position, Quaternion.identity);
     }
 
     public override void EnteredOrange(LightColorType lightColor)
     {
-
+        inOrange = true;
+    }
+    public override void ExitedOrange()
+    {
+        inOrange = false;
     }
     public override void RecieveDamage(float damage) { }
     public override void RecieveDamage(float damage, LightColorType lightColor) { }
+    public override void IsInRed(float damage)
+    {
+        base.IsInRed(damage);
+        Shrink(shrinkSpeed * lastDeltaTime);
+    }
 }

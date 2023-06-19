@@ -162,7 +162,7 @@ public class LightController : MonoBehaviour
             {
                 if (col.TryGetComponent(out Entity entity))
                 {
-                    entity.RecieveDamage(lanternDamagePerSeconds * Time.deltaTime);
+                    entity.IsInRed(lanternDamagePerSeconds * Time.deltaTime);
                 }
             }
         }
@@ -216,7 +216,7 @@ public class LightController : MonoBehaviour
 
     void EntityExitedInner(Entity entity)
     {
-        entity.SetSpeedModifierToDefault();
+        entity.ExitedOrange();
 
         if (fuelController != null)
         {
