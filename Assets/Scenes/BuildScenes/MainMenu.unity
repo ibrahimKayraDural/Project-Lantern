@@ -754,6 +754,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5079096893965891544, guid: 88a0b9def41f5d347a06b11029af8976, type: 3}
+      propertyPath: pausable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079096893965891544, guid: 88a0b9def41f5d347a06b11029af8976, type: 3}
       propertyPath: showCursor
       value: 1
       objectReference: {fileID: 0}

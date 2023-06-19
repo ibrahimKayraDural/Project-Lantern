@@ -82,6 +82,10 @@ public class LevelManager : MonoSingleton<LevelManager>
         SceneManager.LoadScene(index);
         return true;
     }
+    public void GoToLevelZero()
+    {
+        SceneManager.LoadScene(0);
+    }
     public void QuitGame()
     {
         Application.Quit();
