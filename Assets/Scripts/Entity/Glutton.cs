@@ -9,10 +9,14 @@ public class Glutton : Entity
     [SerializeField] Animator glowAnimator;
     [SerializeField] LightColorType MonsterLightColor;
 
-    [Header("Targeting")]
-    [SerializeField] Vector2 target;
-    [SerializeField] Vector2 playerLoc;
-    [SerializeField] Vector2 lanternLoc;
+    [SerializeField] GameObject magenta;
+
+    [Header("Values")]
+    [SerializeField] float growthSpeed = 1;
+    [SerializeField] float attackCooldown = 1;
+    [SerializeField] float maxScale = 10;
+
+    float nextAttack_TargetTime;
 
     internal override void Start()
     {
@@ -20,31 +24,36 @@ public class Glutton : Entity
 
         entityLightType = MonsterLightColor;
 
-        Event_PlayerInRange += AttackNow;//Use Attack
-
-        target = transform.position;
+        Event_PlayerInRange += Attack;
     }
 
     internal override void Update()
     {
         base.Update();
-        SelectDestination();
-        //GameObject go = GameObject.FindGameObjectWithTag("Player");
-        AIMovementTo(target);
+
+        Grow(growthSpeed * Time.deltaTime);
     }
 
-    void AttackNow(object sender, TopDownCharacterController playerCont)
+    void Grow(float amount)
     {
-        if (AttackTargetTime > Time.time) return;
+        if (transform.localScale.x >= maxScale || transform.localScale.y >= maxScale) return;
 
-        animator.SetTrigger("Attack");
-
-        if (glowAnimator != null) glowAnimator.SetTrigger("Attack");
-
-        StartAttack(sender, playerCont);
+        transform.localScale = transform.localScale + new Vector3(1, 1, 0) * amount;
     }
-    void SelectDestination()
+
+    void Attack(object sender, TopDownCharacterController playerCont)
     {
-        target = GameManager.instance.GetPlayerPosition();
+        if (nextAttack_TargetTime > Time.time) return;
+
+        nextAttack_TargetTime = Time.time + attackCooldown;
+
+        Instantiate(magenta, playerCont.transform.position, Quaternion.identity);
     }
+
+    public override void EnteredOrange(LightColorType lightColor)
+    {
+
+    }
+    public override void RecieveDamage(float damage) { }
+    public override void RecieveDamage(float damage, LightColorType lightColor) { }
 }

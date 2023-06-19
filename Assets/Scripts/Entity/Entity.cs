@@ -85,13 +85,13 @@ public abstract class Entity : MonoBehaviour
         playerDetectCollider.radius = playerDetectRange;
     }
 
-    public void RecieveDamage(float damage)
+    public virtual void RecieveDamage(float damage)
     {
         _health = Mathf.Max(0, _health - damage);
 
         if (_health == 0) Die();
     }
-    public void RecieveDamage(float damage, LightColorType lightColor)
+    public virtual void RecieveDamage(float damage, LightColorType lightColor)
     {
         float temp_bonusDamage = lightColor == entityLightType ? damageBonus : 1;
 
@@ -251,7 +251,7 @@ public abstract class Entity : MonoBehaviour
         methodToInvoke?.Invoke(type);
     }
 
-    public void EnteredOrange(LightColorType lightColor)
+    public virtual void EnteredOrange(LightColorType lightColor)
     {
         if (AgentExists() && isHinderable)
         {
@@ -263,6 +263,11 @@ public abstract class Entity : MonoBehaviour
         //SlowedWalkAnim
     }
     public void SetSpeedModifierToDefault()
+    {
+        aa();
+    }
+
+    void aa()
     {
         if (AgentExists())
         {

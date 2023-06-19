@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1341220707
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1341220708}
-  m_Layer: 9
-  m_Name: AttackPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1341220708
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1341220707}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.03, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5102715225591570463}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5102715225530012937
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1389516071
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 503886735133105431, guid: f8c5509ba87cc524799f44a483c56f7e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -143,9 +113,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5102715225591570463}
   - component: {fileID: 5102715225591570457}
-  - component: {fileID: 2136536570105672922}
+  - component: {fileID: 2811419043142644480}
   - component: {fileID: 5102715225591570456}
-  - component: {fileID: 5102715225591570462}
   - component: {fileID: 443609855}
   m_Layer: 9
   m_Name: Glutton
@@ -166,7 +135,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5102715225530012936}
-  - {fileID: 1341220708}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -191,7 +159,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2136536570105672922
+--- !u!114 &2811419043142644480
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,24 +172,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DebuffingName: 
-  _speed: 5
+  _speed: 0
   _maxHealth: 1
   _AITick: 0.1
-  _fuelCostMultiplierInOrange: 0.1
-  _speedInOrangePercent: 50
-  playerDetectRange: 2
+  _fuelCostMultiplierInOrange: 0
+  _speedInOrangePercent: 0
+  playerDetectRange: 0.8
   MeshToFlip: {fileID: 5102715225530012936}
   playerDetectCollider: {fileID: 443609855}
-  attackObjectGO: {fileID: 3515490172440334485, guid: 9581853e7699a2c45bfb0494ecbfcfb0, type: 3}
-  attackDuration: 0.5
-  hinderBonus: 1.5
+  attackObjectGO: {fileID: 3515490172440334485, guid: a117fc0fda9290a43a3d14f427c21068, type: 3}
+  attackDuration: 1
+  hinderBonus: 0
   damageBonus: 2
   animator: {fileID: 940092610}
   glowAnimator: {fileID: 1220632235}
   MonsterLightColor: 2
-  target: {x: 0, y: 0}
-  playerLoc: {x: 0, y: 0}
-  lanternLoc: {x: 0, y: 0}
 --- !u!195 &5102715225591570456
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -244,22 +209,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!58 &5102715225591570462
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5102715225591570459}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!58 &443609855
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -275,7 +224,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 0.8
 --- !u!1 &5102715225859567763
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,8 +294,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1389516071
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: -5228196575711944588, guid: a0f972ac96b62414e85663b449090c7b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
