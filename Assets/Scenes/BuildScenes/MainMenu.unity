@@ -339,7 +339,7 @@ MonoBehaviour:
   OnClicked:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1474505278}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
@@ -508,6 +508,10 @@ MonoBehaviour:
     songToPlay: {fileID: 8300000, guid: 1defa7c28f763624e95b7c456ef78d2d, type: 3}
     dontLoop: 0
     dontPersist: 0
+  - levelIndexesToPlay: 01000000
+    songToPlay: {fileID: 8300000, guid: 8e5b6a482997b1147bde37ebb3b6902c, type: 3}
+    dontLoop: 0
+    dontPersist: 0
   currentLevelSong:
     levelIndexesToPlay: 
     songToPlay: {fileID: 0}
@@ -610,6 +614,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1474505278 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2987231226298886184, guid: 88a0b9def41f5d347a06b11029af8976, type: 3}
+  m_PrefabInstance: {fileID: 1847151023}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b90bbbde644667348b904a047e0ced17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1481368072
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,7 +913,7 @@ MonoBehaviour:
   OnClicked:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1474505278}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
         m_MethodName: GoToNextLevelForEvents
         m_Mode: 1
