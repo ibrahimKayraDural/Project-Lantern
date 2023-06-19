@@ -205,7 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DebuffingName: 
   _speed: 5
-  _maxHealth: 5
+  _maxHealth: 1
   _AITick: 0.1
   _fuelCostMultiplierInOrange: 0.1
   _speedInOrangePercent: 50
