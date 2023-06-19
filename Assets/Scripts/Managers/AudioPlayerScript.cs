@@ -12,6 +12,7 @@ public class AudioPlayerScript : MonoBehaviour
         public AudioClip songToPlay;
         public bool dontLoop;
         public bool dontPersist;
+        public float volumeNegation;
     }
 
     public static AudioPlayerScript instance;
@@ -54,6 +55,7 @@ public class AudioPlayerScript : MonoBehaviour
                         audioSource.Stop();
                         audioSource.clip = LS.songToPlay;
                         audioSource.loop = !LS.dontLoop;
+                        audioSource.volume = Mathf.Clamp(1 - LS.volumeNegation, 0, 1);
                         currentLevelSong = LS;
                         audioSource.Play();
                         oldIndex = level;

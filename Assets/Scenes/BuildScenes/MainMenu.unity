@@ -508,15 +508,18 @@ MonoBehaviour:
     songToPlay: {fileID: 8300000, guid: 1defa7c28f763624e95b7c456ef78d2d, type: 3}
     dontLoop: 0
     dontPersist: 0
+    volumeNegation: 0
   - levelIndexesToPlay: 01000000
     songToPlay: {fileID: 8300000, guid: 75d5e296fa60e4f4989b77625ac8b866, type: 3}
     dontLoop: 0
     dontPersist: 0
+    volumeNegation: 0.5
   currentLevelSong:
     levelIndexesToPlay: 
     songToPlay: {fileID: 0}
     dontLoop: 0
     dontPersist: 0
+    volumeNegation: 0
   audioSource: {fileID: 1074373563}
 --- !u!4 &1074373565
 Transform:

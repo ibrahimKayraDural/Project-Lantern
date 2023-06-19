@@ -385,6 +385,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7202c344d97123449a94580e1c43328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioRange: 20
-  MaxAudio: 0.1
+  AudioRange: 15
+  MaxAudio: 0.3
   AS: {fileID: 6524839830047804079}
