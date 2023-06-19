@@ -7,6 +7,7 @@ public class TestMonster : Entity
     [Header("Reference")]
     [SerializeField] Animator animator;
     [SerializeField] Animator glowAnimator;
+    [SerializeField] LightColorType MonsterLightColor;
 
     [Header("Targeting")]
     [SerializeField] Vector2 target;
@@ -17,7 +18,7 @@ public class TestMonster : Entity
     {
         base.Start();
 
-        entityLightType = LightColorType.Red;
+        entityLightType = MonsterLightColor;
 
         Event_PlayerInRange += AttackNow;//Use Attack
 
@@ -37,24 +38,13 @@ public class TestMonster : Entity
         if (AttackTargetTime > Time.time) return;
 
         animator.SetTrigger("Attack");
-        glowAnimator.SetTrigger("Attack");
+
+        if (glowAnimator != null) glowAnimator.SetTrigger("Attack");
 
         StartAttack(sender, playerCont);
     }
     void SelectDestination()
     {
         target = GameManager.instance.GetPlayerPosition();
-
-        //playerLoc = GameManager.instance.GetPlayerPosition();
-        //lanternLoc = GameManager.instance.GetLanternPosition();
-
-        //if ((lanternLoc - new Vector2(transform.position.x, transform.position.y)).magnitude < (playerLoc - new Vector2(transform.position.x, transform.position.y)).magnitude)
-        //{
-        //    target = GameManager.instance.GetLanternPosition();
-        //}
-        //else
-        //{
-        //    target = GameManager.instance.GetPlayerPosition();
-        //}
     }
 }
