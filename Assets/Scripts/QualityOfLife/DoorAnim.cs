@@ -20,8 +20,22 @@ public class DoorAnim : MonoBehaviour
 
         //}
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            if (collision.gameObject.GetComponent<Inventory>().KeyCount>0)
+            {
+                collision.gameObject.GetComponent<Inventory>().UseKey();
+                OpenDoor();
+            }
+
+        }
+    }
+
     void OpenDoor()
     {
         Anim.SetBool("DoorOpen", true);
+        GetComponent<BoxCollider2D>().enabled = false;
     }
 }
